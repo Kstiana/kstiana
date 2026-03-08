@@ -155,10 +155,10 @@
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
     function getInitialTheme() {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved === 'light' || saved === 'dark') return saved;
-      return prefersDark.matches ? 'dark' : 'light';
-    }
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved === 'light' || saved === 'dark') return saved;
+  return 'light'; 
+}
 
     function applyTheme(theme) {
       html.setAttribute('data-theme', theme);
@@ -618,14 +618,12 @@ function initTypedText() {
 
   
   function applyStoredThemeEarly() {
-    try {
-      const saved = localStorage.getItem('ks-portfolio-theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const theme = saved || (prefersDark ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
-    } catch (_) { /* localStorage blocked */ }
-  }
-
+  try {
+    const saved = localStorage.getItem('ks-portfolio-theme');
+    const theme = saved || 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch (_) {}
+}
   
   function initSectionObserver() {
     const sections = $$('section[id]');
